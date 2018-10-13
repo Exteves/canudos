@@ -1,4 +1,4 @@
-package conselheiro.antonio.registerapp
+package conselheiro.antonio.registerapp.model
 
 import conselheiro.antonio.registerapp.model.User
 import retrofit2.Call

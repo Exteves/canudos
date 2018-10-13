@@ -1,4 +1,4 @@
-package conselheiro.antonio.registerapp
+package conselheiro.antonio.registerapp.ui.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView.Adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import conselheiro.antonio.registerapp.R
 import conselheiro.antonio.registerapp.model.House
 import kotlinx.android.synthetic.main.activity_house_item.view.*
 
@@ -13,7 +14,7 @@ class HouseListAdapter(
         private val houses : List<House>,
         private val context : Context) : Adapter<HouseListAdapter.ViewHolder>() {
 
-    override fun onBindViewHolder( holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val house = houses[position]
         holder.bindView(house)
     }
