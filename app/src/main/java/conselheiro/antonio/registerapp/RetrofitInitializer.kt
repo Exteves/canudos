@@ -9,4 +9,6 @@ class RetrofitInitializer {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
     }
+
+    fun loginService () : LoginService = retrofit.create(LoginService::class.java)
 }

@@ -9,13 +9,13 @@ import android.view.ViewGroup
 import conselheiro.antonio.registerapp.model.House
 import kotlinx.android.synthetic.main.activity_house_item.view.*
 
-class HouseListAdapter(private val houses : List<House>,
-                       private val context : Context) : Adapter<HouseListAdapter.ViewHolder>() {
+class HouseListAdapter(
+        private val houses : List<House>,
+        private val context : Context) : Adapter<HouseListAdapter.ViewHolder>() {
 
     override fun onBindViewHolder( holder: ViewHolder, position: Int) {
         val house = houses[position]
-        holder.title.text = house.name
-        holder.lord.text = house.currentLord
+        holder.bindView(house)
     }
 
     override fun onCreateViewHolder( parent : ViewGroup, p1: Int): ViewHolder {
