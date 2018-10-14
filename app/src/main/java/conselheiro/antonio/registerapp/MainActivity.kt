@@ -3,14 +3,11 @@ package conselheiro.antonio.registerapp
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import conselheiro.antonio.registerapp.model.LoginResponse
 import conselheiro.antonio.registerapp.model.User
-import conselheiro.antonio.registerapp.retrofit.RetrofitInitializer
 import conselheiro.antonio.registerapp.ui.activity.Home
+import kotlinx.android.synthetic.main.activity_home.view.*
 import kotlinx.android.synthetic.main.activity_main.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,26 +15,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        RetrofitInitializer().loginService().login()
 
-        val call = RetrofitInitializer().loginService().login()
-        call.enqueue(object : Callback<List<User>>{
-            override fun onResponse(call: Call<List<User>?>?, response: Response<List<User>?>?) {
+        getIn.setOnClickListener{
+            val usrname  = username.text
+            val pwd = password.text
 
-                response?.body()?.let{
-                    val tokenUser : List<User> = it
+            val user = User(usrname.toString(), pwd.toString())
+
+            LoginWebClient().login(user, object : LoginResponse<String> {
+                override fun success(token: String) {
+                    val intent = Intent(this@MainActivity, Home::class.java)
+                    intent.putExtra("token", token)
+                    startActivity(intent)
                 }
-            }
-
-            override fun onFailure(call: Call<List<User>>, t: Throwable) {
-                Log.e("onFailure error", t?.message)
-            }
-        })
-
-
-        getIn.setOnClickListener {
-            val intent = Intent(this, Home::class.java)
-            startActivity(intent)
+            })
         }
     }
 }
