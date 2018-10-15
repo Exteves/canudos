@@ -30,10 +30,12 @@ class SessionManager {
         editor.commit()
     }
 
-    fun getUserDetails(){
+    fun getUserDetails(): HashMap<String, String> {
         var user: Map<String, String> = HashMap<String, String>()
         (user as HashMap).put(KEY_EMAIL, pref.getString(KEY_EMAIL, null))
         (user as HashMap).put(KEY_TOKEN, pref.getString(KEY_TOKEN, null))
+
+        return user
     }
 
     fun LogoutUser(){
