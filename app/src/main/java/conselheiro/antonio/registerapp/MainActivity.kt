@@ -3,10 +3,9 @@ package conselheiro.antonio.registerapp
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import conselheiro.antonio.registerapp.model.LoginResponse
 import conselheiro.antonio.registerapp.model.User
-import conselheiro.antonio.registerapp.ui.activity.Home
-import kotlinx.android.synthetic.main.activity_home.view.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -15,18 +14,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         getIn.setOnClickListener{
             val usrname  = username.text
             val pwd = password.text
 
             val user = User(usrname.toString(), pwd.toString())
 
-            LoginWebClient().login(user, object : LoginResponse<String> {
-                override fun success(token: String) {
-                    val intent = Intent(this@MainActivity, Home::class.java)
-                    intent.putExtra("token", token)
-                    startActivity(intent)
+            LoginWebClient().login(user, object : LoginResponse<User> {
+                override fun success(token: User) {
+                    Toast.makeText(this@MainActivity, token.token, Toast.LENGTH_LONG).show()
                 }
             })
         }
