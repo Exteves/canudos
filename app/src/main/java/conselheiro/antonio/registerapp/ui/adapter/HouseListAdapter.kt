@@ -16,10 +16,12 @@ class HouseListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val house = houses[position]
-        holder.bindView(house)
+        holder?.let{
+            it.bindView(house)
+        }
     }
 
-    override fun onCreateViewHolder( parent : ViewGroup, p1: Int): ViewHolder {
+    override fun onCreateViewHolder( parent : ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.activity_house_item, parent, false)
         return ViewHolder(view)
     }

@@ -11,7 +11,7 @@ import retrofit2.Response
 class LoginWebClient {
 
     fun login(user: User, callbackResponse: LoginResponse<User>){
-        val call = RetrofitInitializer().loginService().login(user)
+        val call = RetrofitInitializer("https://reqres.in/api/").loginService().login(user)
         call.enqueue(object : Callback<User> {
 
             override fun onFailure(call: Call<User>, t: Throwable) {
